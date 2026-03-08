@@ -19,7 +19,7 @@ def get_embedding(text):
     try:
         clean_text = text.replace("\n", " ").strip()
         result = genai.embed_content(
-            model="models/text-embedding-001",
+            model="models/gemini-embedding-001",
             content=clean_text,
             task_type="retrieval_document",
             title="Mood Quote"

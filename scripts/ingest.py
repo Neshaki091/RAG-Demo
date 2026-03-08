@@ -38,10 +38,10 @@ def main():
     
     # Tìm tất cả file .txt trong thư mục data
     # Bạn có thể đổi "*.txt" thành "*.md" nếu muốn dùng Markdown
-    files = glob.glob(os.path.join(DATA_FOLDER, "*.txt"))
+    files = glob.glob(os.path.join(DATA_FOLDER, "*.md"))
 
     if not files:
-        print(f"⚠️ Không tìm thấy file .txt nào trong thư mục '{DATA_FOLDER}'!")
+        print(f"⚠️ Không tìm thấy file .md nào trong thư mục '{DATA_FOLDER}'!")
         return
 
     success_count = 0

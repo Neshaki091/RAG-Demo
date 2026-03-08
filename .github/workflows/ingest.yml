@@ -1,0 +1,34 @@
+name: Ingest Quotes to Supabase
+
+# Trigger: Chạy khi nào?
+on:
+  workflow_dispatch: # Cho phép bấm nút chạy thủ công (Manual Run) để test ngay
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest # Mượn máy ảo Linux của GitHub
+    
+    steps:
+      # 1. Tải code từ kho về máy ảo
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Cài Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. Cài thư viện từ requirements.txt
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # 4. Chạy script Python
+      - name: Run Ingest Script
+        env:
+          # Mapping Secret từ GitHub vào biến môi trường của Python
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/ingest.py
